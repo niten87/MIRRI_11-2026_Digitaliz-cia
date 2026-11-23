@@ -1,0 +1,79 @@
+# Jediný zdroj pravdy pre žiadosť ELARA-AI. Reálne firemné/osobné údaje NIE sú tu —
+# len placeholdre; skutočné hodnoty v _anonymization-key.local.md (gitignored).
+project:
+  nazov: "ELARA-AI — Embedded Language-to-Action Research for Advanced Manufacturing"
+  skratka: "ELARA-AI"
+  regime: "A"
+  miesto_realizacie: "Košice - mestská časť Juh"   # mimo BA kraja → región uplift OK
+  trl_start: 4
+  trl_end: 7
+  prioritne_domeny: ["3-1", "3-2"]
+
+applicant:
+  nazov: "[ZIADATEL]"
+  ico: "[ICO]"
+  dic: "[DIC]"
+  ic_dph: "[IC_DPH]"
+  pravna_forma: "Spoločnosť s ručením obmedzeným"
+  statutar: "[STATUTAR]"
+  adresa: "[ADRESA]"
+  koresp_adresa: "[ADRESA]"
+  iban: "[IBAN]"
+  banka: "[BANKA]"
+  msp:
+    zamestnanci: 12
+    obrat_eur: 4000000        # >2M (nie mikro), ≤10M → malý
+    suvaha_eur: 3000000
+    size_category: "maly"
+
+kontakt:
+  meno: "[STATUTAR]"
+  telefon: "[TELEFON]"
+  email: "[EMAIL]"
+
+financovanie:
+  celkove_opravnene: 1056000   # == Σ COV rozpočtu
+  ziadana_ppm: 633600          # == Σ nárokované (60 % COV)
+  spolufinancovanie: 422400    # == COV − PPM
+
+work_packages:
+  - id: "3-1"
+    trl_start: 4
+    aktivity:
+      - por: 1
+        nazov: "Návrh a tréning foundation modelu pre language-to-action riadenie"
+        vystup: "Predtrénovaný model + evaluačný protokol"
+        zaciatok: "2025-11-01"
+        koniec: "2026-03-31"
+  - id: "3-2"
+    trl_start: 4
+    aktivity:
+      - por: 2
+        nazov: "Integrácia s digitálnym dvojčaťom a validácia v relevantnom prostredí"
+        vystup: "Prototyp preukázaný v prevádzkovom prostredí (TRL 7)"
+        zaciatok: "2026-01-01"
+        koniec: "2026-06-30"
+
+personnel:
+  - meno: "[OSOBA_1]"
+    pozicia: "hlavný AI architekt"
+    fte: 1.0
+    cv: "annexes/cv_osoba1.pdf"
+  - meno: "[OSOBA_2]"
+    pozicia: "vývoj a konštrukcia (automotive)"
+    fte: 0.8
+    cv: "annexes/cv_osoba2.pdf"
+
+milestones:
+  - por: 1
+    nazov: "Funkčný prototyp validovaný v relevantnom prostredí"
+    aktivity: [1, 2]
+    koniec: "2026-06-30"
+
+risks:
+  - por: 1
+    nazov: "Nedostatok trénovacích dát pre doménu výroby"
+    typ: "interné"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "Zmluvný výskum + syntetické dáta z digitálneho dvojčaťa"

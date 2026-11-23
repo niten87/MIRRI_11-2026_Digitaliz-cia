@@ -1,0 +1,29 @@
+# Study manifest pre túto grantovú žiadosť (číta ho tool/grant.py).
+
+project:
+  title: "Žiadosť – Modelová výskumná výzva 2026"
+  short_name: "modelova-vyzva-2026"
+  language: "sk-SK"
+  manuscript_type: "report"
+
+paths:
+  manuscript_dir: "manuscript"
+  references_dir: "references"
+  analysis_dir: "analysis"
+  tables_dir: "tables"
+  figures_dir: "figures"
+  qc_reports_dir: "analysis/qc_reports"
+
+manuscript:
+  structure: "grant"
+  main_sections:
+    ciele: "manuscript/20_ciele.md"
+    metodika: "manuscript/30_metodika.md"
+    impact: "manuscript/40_impact.md"
+
+literature:
+  source_registry: "references/source-registry.yaml"
+
+publication:
+  build_profiles:
+    - "report"

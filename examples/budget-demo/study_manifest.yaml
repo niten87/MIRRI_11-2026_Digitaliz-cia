@@ -1,0 +1,5 @@
+project:
+  title: "Budget demo (režim A)"
+  short_name: "budget-demo"
+paths:
+  qc_reports_dir: "analysis/qc_reports"

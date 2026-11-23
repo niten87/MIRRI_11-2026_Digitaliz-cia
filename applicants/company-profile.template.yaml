@@ -1,0 +1,27 @@
+# Schéma profilu žiadateľa (firmy). Toto je COMMITNUTÁ šablóna — obsahuje LEN placeholdre.
+# Reálne hodnoty patria výhradne do gitignored `applicants/companies.local.yaml`
+# (viď applicants/README.md). Jeden centrálny register pre viacero firiem.
+#
+# Kľúč `placeholders` je mapa placeholder → reálna hodnota (reverzný kľúč). Konvencia
+# ASCII placeholderov je zhodná s `tool/checks/check_anonymization_leaks.py`.
+
+companies:
+  <company-id>:                      # napr. "valta", "acme" — kľúč pre `grant.py applicant`
+    nazov_display: "<interný názov firmy pre prehľad>"
+    placeholders:
+      ZIADATEL: "<obchodný názov, napr. Firma s. r. o.>"
+      ICO: "<IČO>"
+      DIC: "<DIČ>"
+      IC_DPH: "<IČ DPH, napr. SK...>"
+      STATUTAR: "<meno štatutára>"
+      ADRESA: "<sídlo>"
+      IBAN: "<IBAN>"
+      BANKA: "<banka>"
+      TELEFON: "<telefón>"
+      EMAIL: "<e-mail>"
+    msp:                             # pre check_eligibility (výpočet veľkosti podniku)
+      zamestnanci: 0
+      obrat_eur: 0
+      suvaha_eur: 0
+      size_category: "maly"          # mikro|maly|stredny|velky (over výpočtom)
+    poznamky: "<VaV track-record, prepojené/partnerské podniky, atď.>"

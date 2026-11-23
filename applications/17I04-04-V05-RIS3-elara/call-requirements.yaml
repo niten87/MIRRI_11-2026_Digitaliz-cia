@@ -1,0 +1,200 @@
+# Rámec výzvy 17I04-04-V05 (RIS3) pre žiadosť ELARA-AI. Fakty: calls/17I04-04-V05-RIS3/SEMANTIC-MAP.md.
+version: 2
+
+call:
+  name: "Podpora VaV v oblasti digitálnej transformácie Slovenska 2"
+  number: "17I04-04-V05"
+  deadline: "2025-10-03"              # podanie (Usmernenie č.1); pozn.: výzva je už CLOSED
+  realization_deadline: "2026-06-30"  # koniec vecnej realizácie
+  allocation_eur: 45000000
+  regime: "A"
+  komponent: "17 – Digitálne Slovensko"
+  investicia: "Investícia 4: Podpora projektov zameraných na vývoj a aplikáciu špičkových digitálnych technológií"
+  language: "sk"
+  warn_days: 14
+
+sections:
+  - id: "abstrakt"
+    title: "Zhrnutie (abstrakt)"
+    manuscript: "manuscript/10_abstrakt.md"
+    required: true
+    max_words: 300
+  - id: "ciel"
+    title: "Cieľ projektu a prioritná oblasť domény"
+    manuscript: "manuscript/20_ciel.md"
+    required: true
+  - id: "excelentnost"
+    title: "EXCELENTNOSŤ — východisková situácia a relevantnosť cieľov (vrátane SWOT)"
+    manuscript: "manuscript/40_excelentnost.md"
+    required: true
+  - id: "technicke"
+    title: "Technické riešenie, TRL a udržateľnosť"
+    manuscript: "manuscript/50_technicke.md"
+    required: true
+  - id: "dopad"
+    title: "DOPAD — očakávané výsledky, dopady a šírenie"
+    manuscript: "manuscript/60_dopad.md"
+    required: true
+  - id: "aktivity"
+    title: "Aktivity, harmonogram a míľniky"
+    manuscript: "manuscript/70_aktivity.md"
+    required: true
+  - id: "rizika"
+    title: "Implementačné riziká a ich manažment"
+    manuscript: "manuscript/80_rizika.md"
+    required: true
+  - id: "manazment"
+    title: "Projektový manažment a personálne kapacity"
+    manuscript: "manuscript/90_manazment.md"
+    required: true
+
+annexes:
+  # Prílohy generuje framework (build --target all) do publication/annexes/. Povinné → required:true.
+  - id: "opis-projektu"
+    title: "Opis projektu (Príloha č. 2 Zmluvy)"
+    artifact: "publication/opis.docx"
+    required: true
+    format: "docx"
+  - id: "cestne-vyhlasenie"
+    title: "Čestné vyhlásenie žiadateľa (Príloha 1 výzvy)"
+    artifact: "publication/annexes/priloha-1-cestne-vyhlasenie.docx"
+    required: true
+    format: "docx"
+  - id: "msp-vyhlasenie"
+    title: "Modelové vyhlásenie o kvalifikovaní sa ako MSP"
+    artifact: "publication/annexes/msp-vyhlasenie.docx"
+    required: true
+    format: "docx"
+  - id: "vypis-rt"
+    title: "Údaje na výpis z registra trestov (Príloha 3 výzvy)"
+    artifact: "publication/annexes/priloha-3-vypis-rt.docx"
+    required: true
+    format: "docx"
+  - id: "priloha-5-porovnavacia-tabulka"
+    title: "Porovnávacia tabuľka — neprekrývanie s Komponentom 9 (Príloha 5)"
+    artifact: "publication/annexes/priloha-5-porovnavacia-tabulka.docx"
+    required: true
+    format: "docx"
+  - id: "zivotopisy"
+    title: "Životopisy kľúčových expertov"
+    artifact: "publication/annexes/zivotopisy-klucovych-expertov.docx"
+    required: true
+    format: "docx"
+  - id: "doklad-vav"
+    title: "Doklad preukazujúci realizáciu VaV projektov (2 roky)"
+    artifact: "publication/annexes/doklad-o-vav-projektoch.docx"
+    required: true
+    format: "docx"
+
+budget:
+  file: "budget/rozpocet.csv"
+  currency: "EUR"
+  vat_included: false
+  min_cov: 300000
+  max_cov: 2200000
+  work_packages: ["3-1", "3-2", "3-3", "3-4"]
+  require_trl_per_wp: true
+  categories:
+    A: ["521", "551", "518", "920"]
+    B: ["521", "940"]
+  pausal:
+    A:
+      code: "920"
+      rate: 0.20
+      base_codes: ["521", "551", "518"]
+    B:
+      code: "940"
+      rate: 0.40
+      base_codes: ["521"]
+  totals:
+    sum_wp_equals_total: true
+    row_check: "celkove = pocet * jednotkova_cena"
+
+aid_intensity:
+  scheme_ref: "legislation.yaml#schema-vav-d1"
+  category: "experimentalny_vyvoj"
+  base_rate: 0.25
+  size_uplift:
+    mikro: 0.20
+    maly: 0.20
+    stredny: 0.10
+    velky: 0.0
+  region_uplift: 0.15
+  region_uplift_condition: "miesto_realizacie != 'BA kraj'"
+  call_cap: 0.60
+  scheme_cap: 0.80
+  regime_B_fixed: 0.60
+  per_row_check: "narokovane = celkove * intenzita"
+  effective_le_cap: true
+
+indicators:
+  file: "indicators/indicators.csv"
+  min_main: 1
+  max_main: 3
+  min_secondary: 1
+  max_secondary: 3
+  max_total: 6
+  require_dissemination_secondary: true
+  fields: ["nazov", "definicia", "merna_jednotka", "vychodiskova_hodnota", "planovana_hodnota", "typ"]
+  plan_by: "2026-06-30"
+  catalogue_ref: "calls/17I04-04-V05-RIS3/source-md/oficialne/4-vyzva-17i04-04-v05-ris3-priloha-4-vyzvy-priklady-meratelnych-ukazovatelov.md"
+
+consistency:
+  - id: "cov_opis_eq_rozpocet"
+    left: "financovanie.celkove_opravnene"
+    right: "budget.total_cov"
+    op: "eq"
+    severity: "blocker"
+  - id: "ppm_eq_sum_narokovane"
+    left: "financovanie.ziadana_ppm"
+    right: "budget.sum_narokovane"
+    op: "eq"
+    severity: "blocker"
+  - id: "spolufinancovanie"
+    expr: "financovanie.spolufinancovanie == budget.total_cov - budget.sum_narokovane"
+    severity: "blocker"
+  - id: "trl_koniec_6_8"
+    expr: "6 <= project.trl_end <= 8"
+    severity: "blocker"
+  - id: "wp_opis_eq_budget"
+    expr: "set(opis.work_packages) == set(budget.work_packages)"
+
+scoring:
+  min_total: 10
+  max_total: 15
+  min_per_criterion: 3
+  evaluators: 2
+  criteria: ["excelentnost", "dopad", "implementacia"]
+
+eligibility:
+  - id: "msp_kvalifikacia"
+    description: "Kvalifikácia MSP (počíta sa z obratu/zamestnancov)"
+    computed: "check_eligibility.py::msp"
+  - id: "vav_projekty_2r"
+    description: "≥1 VaV projekt (režim A) / ≥2 (režim B) za 2 roky v doménach RIS3 3-1..3-4"
+    computed: "check_eligibility.py::vav"
+    evidence: "references/source-registry.yaml"
+  - id: "or_zapis_vav"
+    description: "Predmet činnosti VaV zapísaný v OR najneskôr ku dňu podania"
+    met: true
+  - id: "max_jedna_ziadost"
+    description: "Max. 1 žiadosť o PPM na žiadateľa"
+    met: true
+  - id: "neprekryvanie_komp9"
+    description: "Aktivity/výstupy/personál sa neprekrývajú s Komponentom 9 (Príloha 5 + Opis)"
+    met: true
+  - id: "dnsh"
+    description: "Súlad s princípom „výrazne nenarušiť" (DNSH) — atestácia čestným vyhlásením"
+    met: true
+  - id: "zakaz_dvojiteho_financovania"
+    description: "Zákaz dvojitého financovania (§13 zákona o mechanizme)"
+    met: true
+  - id: "bezuhonnost"
+    description: "Bezúhonnosť žiadateľa/štatutárov — výpis z RT (Príloha 3)"
+    met: true
+  - id: "edes"
+    description: "Nie je vylúčený subjekt v systéme EDES"
+    met: true
+  - id: "nie_podnik_v_tazkostiach"
+    description: "Nie je podnikom v ťažkostiach (čl. 2 ods. 18 Nar. 651/2014)"
+    met: true

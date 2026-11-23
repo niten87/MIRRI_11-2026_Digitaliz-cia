@@ -1,0 +1,9 @@
+# STARTER — manifest vyplniteľných príloh. Pre KAŽDÚ prílohu TVOJEJ výzvy:
+#  1) vytvor tokenizovanú šablónu z oficiálneho dokumentu (templates/annexes/<call>/<id>.md),
+#  2) používaj len tokeny z docs/TOKENS.md,
+#  3) zaregistruj ju tu.
+annexes:
+  - id: "cestne-vyhlasenie"
+    title: "Čestné vyhlásenie žiadateľa"
+    template: "cestne-vyhlasenie.md"
+  # - id: "..."          # doplň ďalšie prílohy podľa výzvy (MSP, výpis RT, porovnávacia tabuľka, formulár žiadosti, CV, doklad o VaV, ...)

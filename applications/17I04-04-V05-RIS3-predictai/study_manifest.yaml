@@ -1,0 +1,5 @@
+project:
+  title: "PredictAI — žiadosť o PPM (17I04-04-V05-RIS3)"
+  short_name: "predictai-17I04-04-V05"
+paths:
+  qc_reports_dir: "analysis/qc_reports"

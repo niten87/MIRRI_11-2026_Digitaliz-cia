@@ -1,0 +1,51 @@
+# Rámec konkrétnej výzvy = "framework" grantu, voči ktorému sa kontroluje úplnosť.
+# Kontroluje: scripts/check_call_requirements.py (aj cez run_framework_qc.py --call-requirements)
+
+version: 1
+
+call:
+  name: "Modelová výskumná výzva 2026"
+  deadline: "2026-09-30"
+  language: "sk"
+
+sections:
+  - id: "ciele"
+    title: "Ciele projektu"
+    manuscript: "manuscript/20_ciele.md"
+    required: true
+    max_words: 400
+    max_chars: 3000
+  - id: "metodika"
+    title: "Metodika a plán prác"
+    manuscript: "manuscript/30_metodika.md"
+    required: true
+    max_words: 900
+  - id: "impact"
+    title: "Prínos a dopad"
+    manuscript: "manuscript/40_impact.md"
+    required: true
+    min_words: 60
+    max_words: 600
+
+annexes:
+  - id: "cv_ziadatel"
+    title: "CV zodpovedného riešiteľa"
+    artifact: "annexes/cv_ziadatel.pdf"
+    required: true
+    max_pages: 2
+  - id: "vyhlasenie_eticka"
+    title: "Etické vyhlásenie"
+    artifact: "annexes/vyhlasenie_eticka.pdf"
+    required: true
+  - id: "zoznam_publikacii"
+    title: "Zoznam publikácií (track record)"
+    artifact: "annexes/zoznam_publikacii.pdf"
+    required: false
+
+eligibility:
+  - id: "pi_phd"
+    description: "Zodpovedný riešiteľ má PhD"
+    met: true
+  - id: "no_double_funding"
+    description: "Projekt nie je financovaný z inej schémy"
+    met: true

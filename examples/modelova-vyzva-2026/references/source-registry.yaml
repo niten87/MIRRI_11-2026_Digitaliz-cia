@@ -1,0 +1,33 @@
+# Asset / track-record register pre grant.
+# Tu žijú vlastné výstupy žiadateľa, ktoré v texte cituješ ako [@key].
+# (Staré žiadosti a vyhlásenia sú prílohy — patria do call-requirements.yaml / annexes/,
+#  a ich reusable pasáže do evidence notes, nie sem.)
+sources:
+  - id: "novak2024method"
+    type: "journal_article"
+    title: "A Reusable Method for Applied Studies"
+    authors:
+      - family: "Novák"
+        given: "J."
+    year: 2024
+    doi: "10.1000/novak-method"
+    cluster: "track-record"
+    priority: "must-read"
+    status: "cited"
+    used_in:
+      - "manuscript/30_metodika.md"
+    fulltext_status: "available"
+  - id: "novak2023impact"
+    type: "journal_article"
+    title: "Measuring Applied Impact"
+    authors:
+      - family: "Novák"
+        given: "J."
+    year: 2023
+    doi: "10.1000/novak-impact"
+    cluster: "track-record"
+    priority: "must-read"
+    status: "cited"
+    used_in:
+      - "manuscript/40_impact.md"
+    fulltext_status: "available"

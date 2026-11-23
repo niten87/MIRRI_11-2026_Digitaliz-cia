@@ -1,0 +1,72 @@
+# Minimálne v2 demo zamerané na rozpočtové výpočty (režim A).
+version: 2
+call:
+  name: "Budget demo (režim A)"
+  number: "DEMO-01"
+  deadline: "2026-12-31"
+  regime: "A"
+  language: "sk"
+budget:
+  file: "budget/rozpocet.csv"
+  currency: "EUR"
+  vat_included: false
+  min_cov: 300000
+  max_cov: 2200000
+  work_packages: ["3-1"]
+  categories:
+    A: ["521", "518", "920"]
+    B: ["521", "940"]
+  pausal:
+    A:
+      code: "920"
+      rate: 0.20
+      base_codes: ["521", "518"]
+    B:
+      code: "940"
+      rate: 0.40
+      base_codes: ["521"]
+aid_intensity:
+  scheme_ref: "legislation.yaml#schema-vav-d1"
+  category: "experimentalny_vyvoj"
+  base_rate: 0.25
+  size_uplift:
+    mikro: 0.20
+    maly: 0.20
+    stredny: 0.10
+    velky: 0.0
+  region_uplift: 0.15
+  region_uplift_condition: "miesto_realizacie != 'BA kraj'"
+  call_cap: 0.60
+  scheme_cap: 0.80
+  regime_B_fixed: 0.60
+  per_row_check: "narokovane = celkove * intenzita"
+  effective_le_cap: true
+indicators:
+  file: "indicators/indicators.csv"
+  min_main: 1
+  max_main: 3
+  min_secondary: 1
+  max_secondary: 3
+  max_total: 6
+  require_dissemination_secondary: true
+  fields: ["nazov", "definicia", "merna_jednotka", "vychodiskova_hodnota", "planovana_hodnota", "typ"]
+  plan_by: "2026-06-30"
+consistency:
+  - id: "cov_opis_eq_rozpocet"
+    left: "financovanie.celkove_opravnene"
+    right: "budget.total_cov"
+    op: "eq"
+    severity: "blocker"
+  - id: "ppm_eq_sum_narokovane"
+    left: "financovanie.ziadana_ppm"
+    right: "budget.sum_narokovane"
+    op: "eq"
+    severity: "blocker"
+  - id: "spolufinancovanie"
+    expr: "financovanie.spolufinancovanie == budget.total_cov - budget.sum_narokovane"
+  - id: "trl_koniec_6_8"
+    expr: "6 <= project.trl_end <= 8"
+eligibility:
+  - id: "msp_kvalifikacia"
+    description: "Kvalifikácia MSP (počíta sa z obratu/zamestnancov)"
+    computed: "check_eligibility.py::msp"

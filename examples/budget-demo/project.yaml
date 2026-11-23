@@ -1,0 +1,17 @@
+project:
+  nazov: "Budget demo projekt"
+  skratka: "DEMO"
+  regime: "A"
+  miesto_realizacie: "Košice"
+  trl_start: 4
+  trl_end: 7
+applicant:
+  msp:
+    zamestnanci: 8
+    obrat_eur: 3000000        # > 2M → nie mikro; ≤ 10M → malý
+    suvaha_eur: 2500000
+    size_category: "maly"     # deklarované; C6 overí voči vypočítanému
+financovanie:
+  celkove_opravnene: 600000   # == Σ COV rozpočtu
+  ziadana_ppm: 360000         # == Σ nárokované (60% z 600000)
+  spolufinancovanie: 240000   # == celkove_opravnene - ziadana_ppm

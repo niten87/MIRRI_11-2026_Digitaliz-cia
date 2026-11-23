@@ -1,0 +1,26 @@
+# Track-record žiadateľa (dôkaz VaV aktivít v doménach RIS3 za posledné 2 roky).
+sources:
+  - key: predictai2024pilot
+    title: "PoC prediktívnej analytiky výrobnej linky"
+    year: 2024
+    domain: "3-2"
+    obsah: "Zber a spracovanie výrobných a senzorových dát; prototyp prediktívnej analytiky (detekcia anomálií, predikcia prestojov)."
+    vysledok: "Funkčný proof-of-concept overený na historických dátach; [DOPLNIŤ: kľúčová metrika/výsledok]."
+    doklad: "Interná technická správa / posudok VaV (2024)"
+    pozicia: "prijímateľ"
+  - key: predictai2025iot
+    title: "IoT dátová integrácia a energetická optimalizácia — technická správa"
+    year: 2025
+    domain: "3-3"
+    obsah: "Integrácia IoT senzorov a ERP dát cez API; analýza energetickej náročnosti a návrh optimalizačných opatrení."
+    vysledok: "Overený dátový model a integračná vrstva; [DOPLNIŤ: dosiahnutá úspora/výsledok]."
+    doklad: "Technická správa (2025) / odkaz na webové sídlo"
+    pozicia: "prijímateľ"
+  - key: predictai2024senzory
+    title: "[DOPLNIŤ: názov VaV projektu v doméne 3-1 — inteligentné/prepojené senzory a zariadenia]"
+    year: 2024
+    domain: "3-1"
+    obsah: "[DOPLNIŤ: obsah — napr. návrh a integrácia prepojených senzorov / edge zber dát]"
+    vysledok: "[DOPLNIŤ: výsledok/metrika]"
+    doklad: "[DOPLNIŤ: posudok VaV / technická správa]"
+    pozicia: "prijímateľ"

@@ -1,0 +1,20 @@
+# Pinnuté zdroje pre budget-demo (overené cez WebFetch 2026-07-08).
+freshness_window_days: 30
+sources:
+  - id: "gber-651-2014"
+    title: "Commission Regulation (EU) No 651/2014 (GBER)"
+    url: "https://eur-lex.europa.eu/eli/reg/2014/651/oj/eng"
+    consolidated_version: "2023-07-01"   # overené na EUR-Lex
+    retrieved_at: "2026-07-08"
+    used_for: ["aid_intensity.base_rate", "aid_intensity.size_uplift", "msp.definicia"]
+  - id: "mirri-plan-obnovy-vyzvy"
+    title: "MIRRI SR — Plán obnovy: Výzvy"
+    url: "https://mirri.gov.sk/plan-obnovy/vyzvy/"
+    retrieved_at: "2026-07-08"
+    used_for: ["call.deadline", "usmernenia_k_vyzve"]
+manual_portals:
+  - id: "register-trestov"
+    title: "Register trestov — výpis (GP SR)"
+    url: "https://esluzby.genpro.gov.sk/ziadost-vo-rt"
+    validity: "3 mesiace"
+    used_for: ["bezuhonnost_statutara"]

@@ -1,0 +1,141 @@
+# Rámec výzvy v2 — cieľová schéma (vyžaduje NASTROJ-0 + NASTROJ-A v lokálnom tool/).
+# DÔLEŽITÉ: súčasný check_call_requirements.py má allow_unknown:False a pozná len
+# bloky call/sections/annexes/eligibility (version:1). Kým nedorazí NASTROJ-A,
+# tento súbor NEspúšťaj cez `tool/grant.py check` (blokol by nové bloky).
+# Kým to platí, používaj v1 šablónu call-requirements-template.yaml.
+#
+# Kontroluje (cieľovo, v tool/checks/): check_call_requirements.py + check_budget.py +
+# check_aid_intensity.py + check_indicators.py + check_cross_document_consistency.py
+# Referencia: docs/SPEC-grantapp.md §2.2, docs/BACKLOG-grantapp.md (NASTROJ-A)
+
+version: 2
+
+call:
+  name: "<názov výzvy>"
+  number: "<kód výzvy, napr. 17I04-04-V05>"
+  deadline: "2025-10-03"            # termín PODANIA (deadline_passed=blocker); pozor: ≠ realizácia
+  realization_deadline: "2026-06-30" # koniec vecnej realizácie (info, NIE podanie)
+  allocation_eur: 45000000
+  regime: "A"                        # A = režim štátnej pomoci | B = výskumná organizácia (mimo režim)
+  language: "sk"
+  warn_days: 14
+
+sections:                            # próza sekcií Opisu (limity v slovách/znakoch; [@key] sa nepočíta)
+  - id: "zhrnutie_abstrakt"
+    title: "Zhrnutie (abstrakt)"
+    manuscript: "manuscript/10_abstrakt.md"
+    required: true
+    min_words: 150
+    max_words: 250
+  - id: "excelentnost_vychodiskova_situacia"
+    title: "EXCELENTNOSŤ – Východisková situácia a relevantnosť cieľov"
+    manuscript: "manuscript/40_excelentnost_vychodisko.md"
+    required: true
+    # max_words: null → bez limitu (over v FAQ danej výzvy)
+
+annexes:                             # required/optional + formát + podmienená povinnosť
+  - id: "opis-projektu"
+    title: "Opis projektu (Príloha č. 2 Zmluvy)"
+    artifact: "annexes/2b-opis-projektu.docx"
+    required: true
+    format: "docx"                   # NOVÉ: vynúti formát predloženia
+  - id: "priloha-5-porovnavacia-tabulka"
+    title: "Porovnávacia tabuľka (neprekrývanie s Komponentom 9)"
+    artifact: "annexes/priloha-5.xlsx"
+    required_if: "komponent9_history == true"   # NOVÉ: podmienená povinnosť
+
+# ---- NOVÝ BLOK: rozpočet (check_budget.py) ----
+budget:
+  file: "budget/rozpocet.csv"
+  currency: "EUR"
+  vat_included: false                # DPH nie je oprávnený výdavok
+  min_cov: 300000                    # min. celkové oprávnené výdavky bez DPH / projekt
+  max_cov: 2200000                   # max. dtto
+  work_packages: ["3-1", "3-2", "3-3", "3-4"]   # domény RIS3 relevantné pre výzvu
+  require_trl_per_wp: true
+  categories:                        # povolené kategórie výdavkov podľa režimu
+    A: ["521", "551", "518", "920"]  # personál / odpisy / zmluvný výskum / paušál 20%
+    B: ["521", "940"]                # personál / paušál 40%
+  pausal:
+    A:
+      code: "920"
+      rate: 0.20
+      base_codes: ["521", "551", "518"]
+    B:
+      code: "940"
+      rate: 0.40
+      base_codes: ["521"]
+  totals:
+    sum_wp_equals_total: true        # Σ SPOLU(3-1..3-4) == SPOLU oprávnené výdavky
+    row_check: "celkove = pocet * jednotkova_cena"
+
+# ---- NOVÝ BLOK: intenzita pomoci (check_aid_intensity.py) ----
+# Referenčné hodnoty pre 17I04-04-V05 (režim A, experimentálny vývoj):
+#   base 25 % + size_uplift + region_uplift(15 p.b.), capnuté call_cap 60 %, strop schémy 80 %.
+aid_intensity:
+  scheme_ref: "legislation.yaml#schema-vav-d1"
+  category: "experimentalny_vyvoj"   # alt: priemyselny_vyskum / studia_uskutocnitelnosti
+  base_rate: 0.25
+  size_uplift:
+    mikro: 0.20
+    maly: 0.20
+    stredny: 0.10
+    velky: 0.0
+  region_uplift: 0.15                # over smer podmienky v FAQ konkrétnej výzvy (Bratislavský kraj)
+  region_uplift_condition: "miesto_realizacie != 'BA kraj'"
+  call_cap: 0.60                     # strop výzvy pre exp. vývoj
+  scheme_cap: 0.80                   # absolútny strop schémy (čl. J)
+  regime_B_fixed: 0.60               # výskumná organizácia = 60 % COV fix (FAQ: nie 100 %)
+  per_row_check: "narokovane = celkove * intenzita"
+  effective_le_cap: true
+
+# ---- NOVÝ BLOK: merateľné ukazovatele (check_indicators.py) ----
+indicators:
+  file: "indicators/indicators.csv"
+  min_main: 1
+  max_main: 3
+  min_secondary: 1
+  max_secondary: 3
+  max_total: 6
+  require_dissemination_secondary: true
+  fields: ["nazov", "definicia", "merna_jednotka", "vychodiskova_hodnota", "planovana_hodnota", "typ"]
+  plan_by: "2026-06-30"              # čas plnenia = koniec realizácie
+  catalogue_ref: "calls/17I04-04-V05-RIS3/source-md/oficialne/4-vyzva-17i04-04-v05-ris3-priloha-4-vyzvy-priklady-meratelnych-ukazovatelov.md"
+
+# ---- NOVÝ BLOK: krížové kontroly (check_cross_document_consistency.py) ----
+# Deklaratívne asercie proti project.yaml (single source of truth). Bezpečný evaluátor,
+# whitelist funkcií (set, disjoint, implies) — žiadny eval nad ľubovoľným kódom.
+consistency:
+  - id: "cov_opis_eq_rozpocet"
+    left: "opis.financovanie.celkove_opravnene"
+    right: "budget.total_cov"
+    op: "eq"
+  - id: "ppm_eq_sum_narokovane"
+    left: "opis.financovanie.ziadana_ppm"
+    right: "budget.sum_narokovane"
+    op: "eq"
+  - id: "spolufinancovanie"
+    expr: "opis.financovanie.spolufinancovanie == budget.total_cov - budget.sum_narokovane"
+  - id: "trl_koniec_6_8"
+    expr: "6 <= project.trl_end <= 8"
+  - id: "wp_opis_eq_budget"
+    expr: "set(opis.work_packages) == set(budget.work_packages) == set(priloha5.work_packages)"
+  - id: "personal_komp9_disjoint"
+    expr: "disjoint(priloha5.komp9_personal, project.personnel)"
+  - id: "size_matches_msp"
+    expr: "aid_intensity.size == msp.size_category"
+  - id: "region_uplift_only_outside_ba"
+    expr: "aid_intensity.region_uplift_applied implies project.miesto != 'BA kraj'"
+
+# ---- eligibilita (v1 + evidence/computed) ----
+eligibility:
+  - id: "vav_projekty_2r"
+    description: "≥1 VaV projekt (režim A) / ≥2 (režim B) za 2 roky v doménach 3-1..3-4"
+    met: true
+    evidence: "references/source-registry.yaml"
+  - id: "msp_kvalifikacia"
+    description: "Kvalifikácia MSP podľa modelového vyhlásenia"
+    computed: "check_eligibility.py::msp"
+  - id: "neprekryvanie_komp9"
+    description: "Aktivity/výstupy/personál sa neprekrývajú s Komponentom 9 (Príloha 5)"
+    met: true

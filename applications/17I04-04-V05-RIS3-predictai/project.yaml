@@ -1,0 +1,160 @@
+# Jediný zdroj pravdy pre žiadosť PredictAI. Reálne firemné/osobné údaje NIE sú tu —
+# len placeholdre; skutočné hodnoty patria do gitignored profilu / _anonymization-key.local.md.
+# POZOR — PREDPOKLADY (potvrď): žiadateľ = malý podnik, realizácia mimo Bratislavského kraja,
+# režim A. Vyplýva z cieľovej intenzity 60 % (25 + 20 [malý/mikro] + 15 [región]).
+project:
+  nazov: "PredictAI – Inteligentná prediktívna platforma pre digitálnu transformáciu priemyselnej výroby"
+  skratka: "PredictAI"
+  regime: "A"
+  miesto_realizacie: "[MIESTO realizácie] – mimo Bratislavského kraja"
+  trl_start: 6
+  trl_end: 7                # obhájiteľný cieľ (pilot overený v prevádzke); TRL 8 = ambícia pre vybrané scenáre
+  prioritne_domeny: ["3-1", "3-2", "3-3"]
+
+applicant:
+  nazov: "[ZIADATEL]"
+  ico: "[ICO]"
+  dic: "[DIC]"
+  ic_dph: "[IC_DPH]"
+  pravna_forma: "Spoločnosť s ručením obmedzeným"
+  statutar: "[STATUTAR]"
+  adresa: "[ADRESA]"
+  koresp_adresa: "[ADRESA]"
+  iban: "[IBAN]"
+  banka: "[BANKA]"
+  msp:
+    zamestnanci: 25          # PREDPOKLAD — doplň reálne
+    obrat_eur: 5000000       # PREDPOKLAD — < 10M € → malý podnik
+    suvaha_eur: 4000000      # PREDPOKLAD
+    size_category: "maly"
+
+kontakt:
+  meno: "[STATUTAR]"
+  telefon: "[TELEFON]"
+  email: "[EMAIL]"
+
+financovanie:
+  celkove_opravnene: 2086000   # == Σ COV rozpočtu
+  ziadana_ppm: 1251600         # == Σ nárokované (60 % COV)
+  spolufinancovanie: 834400    # == COV − PPM
+
+work_packages:
+  - id: "3-1"
+    trl_start: 6
+    aktivity:
+      - por: 1
+        nazov: "Analýza ERP systému a návrh architektúry riešenia"
+        vystup: "Dokument architektúry + dátový model"
+        zaciatok: "2025-11-01"
+        koniec: "2025-11-30"
+      - por: 2
+        nazov: "Vývoj API konektorov a dátovej pipeline (ERP + IoT senzory)"
+        vystup: "Funkčné API konektory a dátová pipeline"
+        zaciatok: "2025-12-01"
+        koniec: "2026-01-31"
+  - id: "3-2"
+    trl_start: 6
+    aktivity:
+      - por: 3
+        nazov: "Vývoj a tréning prediktívnych AI modelov"
+        vystup: "Natrénované modely (predikcia porúch/prestojov)"
+        zaciatok: "2026-01-01"
+        koniec: "2026-03-31"
+      - por: 4
+        nazov: "Integrácia AI a vývoj dashboardu (real-time analytika)"
+        vystup: "Integrovaný dashboard prediktívnej analytiky"
+        zaciatok: "2026-02-01"
+        koniec: "2026-03-31"
+  - id: "3-3"
+    trl_start: 6
+    aktivity:
+      - por: 5
+        nazov: "Testovanie a pilotná implementácia (vrátane energetickej optimalizácie)"
+        vystup: "Pilotné nasadenie overené v prevádzke"
+        zaciatok: "2026-02-01"
+        koniec: "2026-05-31"
+      - por: 6
+        nazov: "Finalizácia projektu a odovzdanie prototypu"
+        vystup: "Prototyp TRL 7 + dokumentácia"
+        zaciatok: "2026-06-01"
+        koniec: "2026-06-30"
+
+personnel:
+  - meno: "[OSOBA_1]"
+    pozicia: "projektový manažér"
+    fte: 1.0
+    cv: "annexes/cv_osoba1.pdf"
+  - meno: "[OSOBA_2]"
+    pozicia: "vedúci AI/ML vývoja"
+    fte: 1.0
+    cv: "annexes/cv_osoba2.pdf"
+
+milestones:
+  - por: 1
+    nazov: "Dokončená analýza ERP a návrh architektúry"
+    aktivity: [1]
+    zaciatok: "2025-11-01"
+    koniec: "2025-11-30"
+    akceptacne_kriterium: "Schválený dokument architektúry + dátový model; špecifikácia rozhraní ERP/IoT"
+  - por: 2
+    nazov: "Funkčné API konektory a dátová pipeline"
+    aktivity: [2]
+    zaciatok: "2025-12-01"
+    koniec: "2026-01-31"
+    akceptacne_kriterium: "Dáta tečú end-to-end z ≥ 2 zdrojov (ERP + IoT); pipeline spracuje testovaciu dávku bez chýb"
+  - por: 3
+    nazov: "Vyvinuté a natrénované AI modely"
+    aktivity: [3]
+    zaciatok: "2026-01-01"
+    koniec: "2026-03-31"
+    akceptacne_kriterium: "Presnosť predikcie porúch/prestojov ≥ 85 % na historických dátach (validované na hold-out sete)"
+  - por: 4
+    nazov: "Integrovaný dashboard"
+    aktivity: [4]
+    zaciatok: "2026-02-01"
+    koniec: "2026-03-31"
+    akceptacne_kriterium: "Real-time inferencia a vizualizácia; latencia predikcie < [DOPLNIŤ] s; funkčný alerting"
+  - por: 5
+    nazov: "Pilotná implementácia a testovanie"
+    aktivity: [5]
+    zaciatok: "2026-02-01"
+    koniec: "2026-05-31"
+    akceptacne_kriterium: "Pilot v prevádzke: zníženie neplánovaných prestojov ≥ 20 % a energetickej náročnosti ≥ 10 %"
+  - por: 6
+    nazov: "Odovzdaný prototyp TRL 7 + dokumentácia"
+    aktivity: [6]
+    zaciatok: "2026-06-01"
+    koniec: "2026-06-30"
+    akceptacne_kriterium: "Audit TRL 7 (prototyp overený v relevantnom prevádzkovom prostredí); záverečná technická správa"
+
+risks:
+  - por: 1
+    nazov: "Časové sklzy pri vývoji API a integráciách"
+    typ: "interné"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "Rezervná kapacita tímu, priebežné integračné testy, agilný harmonogram"
+  - por: 2
+    nazov: "Nedostatočná kvalita dát zo senzorov"
+    typ: "interné"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "Validácia dát, čistenie, redundancia senzorov, syntetické dopĺňanie"
+  - por: 3
+    nazov: "Technologické problémy pri pilotnom nasadení"
+    typ: "externé"
+    pravdepodobnost: "stredná"
+    dopad: "vysoký"
+    opatrenie: "Digitálne dvojča a simulácia pred fyzickým nasadením, fázovaný rollout"
+  - por: 4
+    nazov: "Zmena legislatívy (GDPR, AI Act)"
+    typ: "politické"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "Sledovanie legislatívy EÚ/SR, privacy-by-design, právne konzultácie"
+  - por: 5
+    nazov: "Makroekonomické vplyvy (inflácia, ceny energií)"
+    typ: "politické"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "Finančná rezerva v rozpočte, priebežné úpravy cash-flow"

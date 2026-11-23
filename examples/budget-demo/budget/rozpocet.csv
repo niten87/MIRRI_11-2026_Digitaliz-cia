@@ -1,0 +1,4 @@
+wp,nazov_vydavku,kategoria,merna_jednotka,pocet_jednotiek,jednotkova_cena,celkove_opravnene,intenzita,narokovane,vecny_popis
+3-1,Personál (výskumníci),521,osobomesiac,10,40000,400000,0.6,240000,Mzdy výskumného tímu
+3-1,Zmluvný výskum,518,projekt,1,100000,100000,0.6,60000,Externé laboratórne služby
+3-1,Paušál - ostatné výdavky,920,projekt,1,,100000,0.6,60000,20% zo Σ(521+518)

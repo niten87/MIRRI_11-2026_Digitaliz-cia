@@ -1,0 +1,84 @@
+# legislation.yaml — register externých zdrojov (SK/EU) + version pinning.
+# Každé strojovo-kontrolovateľné pravidlo (intenzity, MSP, lehoty) derivuje z konkrétnej
+# konsolidovanej verzie predpisu. Skill `legislation-retrieval` (F4) tento súbor napĺňa
+# cez WebFetch; portálové kroky sú manual:true (neautomatizujú sa).
+# Freshness gate v QC: today-retrieved_at>30d → minor; novšie Usmernenie výzvy → blocker;
+# manuálny doklad po platnosti (napr. výpis z RT >3 mesiace) → major. Viď SPEC §5, §2.4.
+
+# --- EU legislatíva (EUR-Lex, ELI URL, konsolidovaná verzia) ---
+sources:
+  - id: "gber-651-2014"
+    title: "Nariadenie (EÚ) č. 651/2014 (GBER — všeobecné nariadenie o skupinových výnimkách)"
+    url: "https://eur-lex.europa.eu/eli/reg/2014/651/oj/eng"
+    consolidated_version: "<over aktuálnu konsolidáciu na EUR-Lex>"
+    retrieved_at: "2026-07-08"
+    used_for: ["aid_intensity.base_rate", "aid_intensity.size_uplift", "msp.definicia"]
+
+  - id: "rrf-2021-241"
+    title: "Nariadenie (EÚ) 2021/241 (Mechanizmus na podporu obnovy a odolnosti — RRF)"
+    url: "https://eur-lex.europa.eu/eli/reg/2021/241/oj/eng"
+    retrieved_at: "2026-07-08"
+    used_for: ["DNSH", "zakaz_dvojiteho_financovania"]
+
+  - id: "digital-europe-2021-694"
+    title: "Nariadenie (EÚ) 2021/694 (Program Digitálna Európa)"
+    url: "https://eur-lex.europa.eu/eli/reg/2021/694/oj/eng"
+    retrieved_at: "2026-07-08"
+    used_for: ["kontext_digitalnych_technologii"]
+
+  # --- SK schéma a stratégia ---
+  - id: "schema-vav-d1"
+    title: "Schéma štátnej pomoci na VaV z prostriedkov POO (dodatok č. 1)"
+    local_copy: "calls/17I04-04-V05-RIS3/source-md/oficialne/schema-vav-d1-final.md"
+    retrieved_at: "2026-07-08"
+    used_for: ["aid_intensity.scheme_cap", "kategorie_vydavkov", "opravnene_projekty"]
+
+  - id: "sk-ris3-2021"
+    title: "SK RIS3 2021+ — Stratégia inteligentnej špecializácie (VAIA)"
+    url: "https://vaia.gov.sk/sk/strategia-inteligentnej-specializacie-ris3-2/"
+    retrieved_at: "2026-07-08"
+    used_for: ["prioritne_domeny", "suladovy_argument"]
+
+  - id: "ris3-metodicke-usmernenie"
+    title: "VAIA — Metodické usmernenie k posudzovaniu súladu s SK RIS3 2021+"
+    url: "https://vaia.gov.sk/wp-content/uploads/2024/03/Metodicke-usmernenie-k-posudzovaniu-suladu-s-SK-RIS3-2021.pdf"
+    retrieved_at: "2026-07-08"
+    used_for: ["hodnotenie_suladu_ris3"]
+
+  - id: "mirri-plan-obnovy-vyzvy"
+    title: "MIRRI SR — Plán obnovy: Výzvy (aktuálne znenie + Usmernenia)"
+    url: "https://mirri.gov.sk/plan-obnovy/vyzvy/"
+    retrieved_at: "2026-07-08"
+    used_for: ["call.deadline", "usmernenia_k_vyzve"]
+
+# --- Manuálne portály / registre (manual:true — modul ich NEautomatizuje) ---
+manual_portals:
+  - id: "orsr"
+    title: "Obchodný register SR"
+    url: "https://www.orsr.sk/"
+    used_for: ["identifikacia_subjektu", "statutar", "sidlo"]
+  - id: "register-trestov"
+    title: "Register trestov — výpis (GP SR)"
+    url: "https://esluzby.genpro.gov.sk/ziadost-vo-rt"
+    used_for: ["bezuhonnost_statutara"]
+    validity: "3 mesiace"
+  - id: "financna-sprava-dph"
+    title: "Finančná správa — overenie IČ DPH / platiteľ DPH"
+    url: "https://www.financnasprava.sk/sk/elektronicke-sluzby/verejne-sluzby/overovanie-ic-dph"
+    used_for: ["opravnenost_dph"]
+  - id: "rpvs"
+    title: "Register partnerov verejného sektora"
+    url: "https://rpvs.gov.sk/rpvs/Partner/Partner/VyhladavaniePartnera"
+    used_for: ["konecny_uzivatel_vyhod"]
+  - id: "upv-databazy"
+    title: "Úrad priemyselného vlastníctva SR — databázy (patenty/OZ/dizajny)"
+    url: "https://www.indprop.gov.sk/databazy-registre-a-triedenia/databazy-a-registre"
+    used_for: ["ip_indikatory"]
+  - id: "itms2014"
+    title: "ITMS2014+ / ISPO — portál podania a monitorovania"
+    url: "https://www.itms2014.sk/"
+    used_for: ["podanie_ziadosti"]
+  - id: "slovensko-sk"
+    title: "slovensko.sk (ÚPVS) — eID/QES, elektronická schránka, e-doručenka"
+    url: "https://www.slovensko.sk/"
+    used_for: ["autentifikacia", "e_dorucenka"]

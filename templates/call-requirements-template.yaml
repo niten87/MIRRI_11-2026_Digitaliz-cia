@@ -1,0 +1,47 @@
+# Šablóna rámca výzvy — skopíruj do priečinka žiadosti ako call-requirements.yaml
+# a vyplň podľa konkrétnej výzvy (dotačnej schémy).
+#
+# Kontroluje: tool/checks/check_call_requirements.py
+# (aj cez tool/grant.py check / qc)
+
+version: 1
+
+call:
+  name: "<názov výzvy>"
+  deadline: "2026-12-31"   # YYYY-MM-DD; deadline_passed (blocker) / deadline_near (minor)
+  warn_days: 14
+  language: "sk"
+
+sections:
+  - id: "ciele"
+    title: "Ciele projektu"
+    manuscript: "manuscript/20_ciele.md"
+    required: true
+    max_words: 400          # alebo max_chars pre limit na znaky
+  - id: "metodika"
+    title: "Metodika"
+    manuscript: "manuscript/30_metodika.md"
+    required: true
+    max_words: 900
+  - id: "impact"
+    title: "Prínos a dopad"
+    manuscript: "manuscript/40_impact.md"
+    required: true
+    min_words: 60
+    max_words: 600
+
+annexes:
+  - id: "cv_ziadatel"
+    title: "CV zodpovedného riešiteľa"
+    artifact: "annexes/cv_ziadatel.pdf"
+    required: true
+    max_pages: 2            # počet strán PDF sa vynúti
+  - id: "vyhlasenie"
+    title: "Povinné vyhlásenie"
+    artifact: "annexes/vyhlasenie.pdf"
+    required: true
+
+eligibility:
+  - id: "pi_phd"
+    description: "Zodpovedný riešiteľ má PhD"
+    met: true

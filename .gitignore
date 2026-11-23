@@ -1,0 +1,15 @@
+# generované výstupy (celý publication/ vrátane podadresárov, napr. annexes/)
+**/publication/
+**/analysis/qc_reports/
+# python / office
+__pycache__/
+*.pyc
+~$*.docx
+~$*.pptx
+.DS_Store
+
+# lokálne anonymizačné kľúče + profily žiadateľov (reálne firemné/osobné údaje)
+*_.local.md
+*.local.md
+*.local.yaml
+*.local.yml

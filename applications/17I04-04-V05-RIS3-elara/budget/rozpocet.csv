@@ -1,0 +1,5 @@
+wp,nazov_vydavku,kategoria,merna_jednotka,pocet_jednotiek,jednotkova_cena,celkove_opravnene,intenzita,narokovane,vecny_popis
+3-1,Personálne výdavky (výskumný tím),521,osobomesiac,60,8000,480000,0.6,288000,Mzdy výskumníkov a vývojárov
+3-1,Odpisy prístrojov a zariadení,551,projekt,1,100000,100000,0.6,60000,Výpočtová a meracia infraštruktúra
+3-2,Zmluvný výskum,518,projekt,1,300000,300000,0.6,180000,Externé laboratórne a dátové služby
+3-1,Paušálna sadzba - ostatné výdavky,920,projekt,1,,176000,0.6,105600,20% zo Σ(521+551+518)

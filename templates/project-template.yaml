@@ -1,0 +1,59 @@
+# project.yaml — jediný zdroj pravdy (single source of truth) o žiadosti.
+# Opis, rozpočet, indikátory aj Príloha 5 sa z neho generujú alebo proti nemu validujú.
+# Reálne firemné/osobné údaje NEPÍŠ sem — používaj placeholdre; reálne hodnoty sú
+# iba lokálne v _anonymization-key.local.md (gitignored). Viď docs/SPEC-grantapp.md §2.3.
+
+project:
+  nazov: "<plný názov projektu>"
+  skratka: "<SKRATKA>"
+  regime: "A"                        # A = štátna pomoc | B = výskumná organizácia
+  miesto_realizacie: "<obec/kraj>"   # napr. "Košice – mestská časť Juh" → NIE BA kraj
+  trl_start: 4
+  trl_end: 7                         # musí byť 6–8 na konci (kontroluje cross-doc)
+  prioritne_domeny: ["3-1", "3-2"]   # podmnožina work_packages
+
+applicant:
+  nazov: "[ZIADATEL]"
+  ico: "[ICO]"
+  dic: "[DIC]"
+  statutar: "[STATUTAR]"
+  msp:
+    zamestnanci: 8
+    obrat_eur: 610914
+    suvaha_eur: 645134
+    size_category: "maly"            # počítané (check_eligibility.py::msp): <10 & ≤2M€→mikro; <50 & ≤10M€→malý
+
+financovanie:                        # musí sedieť s rozpočtom (cross-doc: cov/ppm/spolufinancovanie)
+  celkove_opravnene: 0               # == Σ COV rozpočtu
+  ziadana_ppm: 0                     # == Σ nárokované; ≤ call_cap * celkove_opravnene
+  spolufinancovanie: 0               # == celkove_opravnene - ziadana_ppm
+
+work_packages:
+  - id: "3-1"
+    trl_start: 4
+    aktivity:
+      - por: 1
+        nazov: "<aktivita>"
+        vystup: "<výstup>"
+        zaciatok: "2025-11-01"
+        koniec: "2026-03-31"
+
+personnel:
+  - meno: "[OSOBA_1]"
+    pozicia: "<pozícia>"
+    fte: 1.0
+    cv: "annexes/cv_osoba1.pdf"
+
+milestones:
+  - por: 1
+    nazov: "<míľnik>"
+    aktivity: [1]
+    koniec: "2026-06-30"
+
+risks:
+  - por: 1
+    nazov: "<riziko>"
+    typ: "interné"
+    pravdepodobnost: "stredná"
+    dopad: "stredný"
+    opatrenie: "<mitigácia>"
